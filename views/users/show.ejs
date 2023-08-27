@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="row">
+  <div class="col-md-4">
+    <h1><%= user.firstName + " " +  user.lastName %></h1>
+    <div class="thumbnail">
+      <img src="<%= user.avatar %>" alt="user profile image">
+      <div class="caption"><h5><a href="mailto: <%= user.email %>"><%= user.email %></a></h5></div>
+      <div>
+        <p style="margin: 0px 10px 10px 10px;">Followers: <%= user.followers.length %>
+          <% if (user.id != currentUser._id) { %>
+            <a href="/follow/<%= user.id %>" class="btn btn-primary" style="margin-left:10px">Follow?</a>
+          <% } %>
+        </p>
+      </div>
+    </div>
+</div>
+
+<div class="col-md-8">
+  <h3 style="margin-top: 30px; margin-left: 20px;"><%= user.username %>'s campgrounds:</h3>
+  <ul>
+    <% campgrounds.forEach(function(campground){ %>
+      <li><a href="/campgrounds/<%= campground.id %>" style="font-size: 20px"><em><%= campground.name %></em></a></li>
+      <em>Created Time: <%= moment(campground.createdAt).fromNow() %></em>
+      <hr>
+    <% }) %>
+  </ul>
+</div>
+
+</div>
+
+<%- include('../partials/footer.ejs') %>
